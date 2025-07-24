@@ -17,7 +17,12 @@
     "@angular/platform-browser": "^19.2.0",
     "@angular/platform-browser-dynamic": "^19.2.0",
     "@angular/router": "^19.2.0",
+    "@types/three": "^0.178.1",
+    "gsap": "^3.13.0",
+    "html2canvas": "^1.4.1",
+    "pietile-eventemitter": "^1.0.1",
     "rxjs": "~7.8.0",
+    "three": "^0.178.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.15.0"
   },
