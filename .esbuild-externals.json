@@ -1,0 +1,6 @@
+{
+  "externals": [
+    "@angular/animations/browser",
+    "@angular/platform-browser/animations"
+  ]
+}
