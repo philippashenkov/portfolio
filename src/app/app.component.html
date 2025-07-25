@@ -1,73 +1,40 @@
+<style></style>
 <div class="portfolio-container">
+  <div class="background-image"></div>
   <div class="portfolio-card">
     <!-- Navigation -->
     <nav class="nav-bar">
       <div class="nav-links">
-        <a href="#" class="nav-link active">Home</a>
-        <a href="#" class="nav-link">About</a>
-        <a href="#" class="nav-link">Contact</a>
+        <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="nav-link">Home</a>
+        <a routerLink="/about" routerLinkActive="active" class="nav-link">About</a>
+        <a routerLink="/contacts" routerLinkActive="active" class="nav-link">Contact</a>
       </div>
       
       <div class="social-links">
-        <a href="https://github.com/philippashenkov" class="social-link github" target="_blank" rel="noopener noreferrer" title="GitHub">
+        <a href="https://github.com/philpashenkov" class="social-link github" target="_blank" rel="noopener noreferrer" title="GitHub">
           ⚡
         </a>
-        <a href="https://linkedin.com/in/philpashenkov" class="social-link linkedin" target="_blank" rel="noopener noreferrer" title="LinkedIn">
+        <a href="https://linkedin.com/in/philip-pashenkov-8891651a1" class="social-link linkedin" target="_blank" rel="noopener noreferrer" title="LinkedIn">
           💼
         </a>
       </div>
     </nav>
 
     <!-- Main content -->
-    <div class="main-content">
-      <!-- 3D Sphere with orbital decorations -->
-      <div class="sphere-container">
-        <!-- Orbital decorations (atom-like structure) -->
-        <div class="orbit orbit-1">
-          <div class="orbital-decoration">*</div>
-        </div>
-        <div class="orbit orbit-2">
-          <div class="orbital-decoration">></div>
-        </div>
-        <div class="orbit orbit-3">
-          <div class="orbital-decoration">○</div>
-        </div>
-        <div class="orbit orbit-4">
-          <div class="orbital-decoration">+</div>
-        </div>
-        <div class="orbit orbit-5">
-          <div class="orbital-decoration">◆</div>
-        </div>
-        <div class="orbit orbit-6">
-          <div class="orbital-decoration">▲</div>
-        </div>
-        
-        <!-- Three.js 3D Earth -->
-        <app-earth-3d></app-earth-3d>
-      </div>
-
-      <!-- Text -->
-      <div class="hero-text">
-        <h1>Hello! I'm Phil Pashenkov<br>Web developer</h1>
-      </div>
-
-      <!-- Character -->
-      <div class="character">
-        <div class="character-image">
-          <div class="character-placeholder">👤</div>
-        </div>
-      </div>
-    </div>
+    <main class="main-content">
+      <router-outlet></router-outlet>
+    </main>
 
     <!-- Footer info -->
     <div class="footer-info">
-      <div class="location">
-        <span>Kyiv</span>
-        <span>Ukraine</span>
-      </div>
       <div class="time">
-        <span>Local time</span>
-        <span>11:53 PM</span>
+        <span class="time-label">My local time</span>
+        <span class="time-value">{{ currentTime }}</span>
+      </div>
+      
+      <div class="location">
+        <span class="location-label">Last online location:</span>
+        <span class="location-value">Kyiv, Ukraine</span>
       </div>
     </div>
   </div>
