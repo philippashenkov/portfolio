@@ -1,4 +1,4 @@
-@use '../../shared/styles/page-base';
+@use '../../shared/styles/page-base' as base;
 
 .contact-content {
   display: grid;
@@ -104,10 +104,21 @@
   }
   
   .submit-btn {
-    @extend .btn;
+    @extend .btn !optional;
     width: 100%;
     font-size: 1.1rem;
     padding: 1rem;
+    background: linear-gradient(45deg, #0057b7, #ffd700);
+    border: none;
+    border-radius: 25px;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    }
   }
 }
 
