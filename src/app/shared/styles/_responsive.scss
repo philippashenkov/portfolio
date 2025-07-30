@@ -1,0 +1,53 @@
+@mixin responsive-styles {
+  @media (max-width: 768px) {
+    .nav-bar {
+      flex-direction: column;
+      gap: 1rem;
+      padding: 1rem;
+
+      .nav-links {
+        gap: 1rem;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+    }
+
+    .info-block {
+      margin: 1rem;
+      padding: 1.5rem;
+    }
+
+    .hero-text h1 {
+      font-size: 2rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .nav-bar {
+      .nav-links .nav-link {
+        font-size: 0.9rem;
+      }
+
+      .social-links .social-link {
+        font-size: 1.2rem;
+      }
+    }
+
+    .info-block {
+      padding: 1rem;
+
+      .info-title {
+        font-size: 1.5rem;
+      }
+
+      .info-content {
+        font-size: 0.9rem;
+      }
+    }
+
+    .footer-info {
+      flex-direction: column;
+      gap: 1rem;
+    }
+  }
+}

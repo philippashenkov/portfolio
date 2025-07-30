@@ -1,281 +1,92 @@
-.portfolio-container {
+:host {
+  display: block;
   min-height: 100vh;
-  width: 100vw;
-  background: linear-gradient(to bottom, #ffd89b 0%, #19547b 115%);
-  padding: 0;
-  font-family: 'Courier New', monospace;
-  position: relative;
-  overflow: hidden;
+  width: 100%;
 }
 
-.portfolio-card {
+.app-container {
+  min-height: 100vh;
   width: 100%;
-  height: 100vh;
-  background: transparent;
-  border-radius: 0;
-  position: relative;
-  overflow: visible;
-  box-shadow: none;
   display: flex;
   flex-direction: column;
-}
+  background: linear-gradient(135deg, #0057b7 0%, #ffd700 100%);
+  color: white;
+  font-family: 'Courier New', monospace;
+  overflow-x: hidden;
+  position: relative;
 
-.nav-bar {
-  display: flex;
-  justify-content: space-between; // Разделяем навигацию и социальные ссылки
-  align-items: center;
-  padding: 40px 0 60px;
-  width: 100%;
-  
-  .nav-links {
-    display: flex;
-    gap: 50px;
-  }
-  
-  .nav-link {
-    color: rgba(255, 255, 255, 0.8);
-    text-decoration: none;
-    font-size: 18px;
-    transition: all 0.3s ease;
-    
-    &:hover {
-      color: #00ffff;
-      text-shadow: 0 0 10px #00ffff;
-    }
-    
-    &.active {
-      color: #ff6b6b;
-      font-weight: bold;
-    }
-  }
-  
-  .social-links {
-    display: flex;
-    gap: 20px;
-    
-    .social-link {
-      color: rgba(255, 255, 255, 0.6);
-      font-size: 24px;
-      transition: all 0.3s ease;
-      text-decoration: none;
-      
-      &:hover {
-        color: #00ffff;
-        transform: translateY(-2px);
-        text-shadow: 0 0 15px #00ffff;
-      }
-      
-      &.github:hover {
-        color: #6cc644;
-        text-shadow: 0 0 15px #6cc644;
-      }
-      
-      &.linkedin:hover {
-        color: #0077b5;
-        text-shadow: 0 0 15px #0077b5;
-      }
-    }
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(10px);
+    pointer-events: none;
+    z-index: 1;
   }
 }
 
-.main-content {
+.content-wrapper {
   flex: 1;
   display: flex;
-  
-  justify-content: center;
+  flex-direction: column;
   position: relative;
-  padding: 0 5vw;
-  perspective: 1500px;
-}
-
-.sphere-container {
-  position: absolute;
-  top: 25vh; // Поднимаем выше, было 45vh
-  left: 50%;
-  transform: translateX(-50%);
-  width: 300px;
-  height: 300px;
-  z-index: 8;
-  transform-style: preserve-3d;
-  perspective: 1000px;
-}
-
-/* Orbital decorations (atom-like structure) */
-.orbit {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 50%;
-  transform-style: preserve-3d;
-  
-  &.orbit-1 {
-    width: 400px;
-    height: 400px;
-    margin: -200px 0 0 -200px;
-    animation: orbit1 8s linear infinite;
-    transform: rotateX(0deg) rotateY(0deg);
-  }
-  
-  &.orbit-2 {
-    width: 450px;
-    height: 450px;
-    margin: -225px 0 0 -225px;
-    animation: orbit2 12s linear infinite;
-    transform: rotateX(60deg) rotateY(0deg);
-  }
-  
-  &.orbit-3 {
-    width: 500px;
-    height: 500px;
-    margin: -250px 0 0 -250px;
-    animation: orbit3 15s linear infinite;
-    transform: rotateX(120deg) rotateY(0deg);
-  }
-  
-  &.orbit-4 {
-    width: 380px;
-    height: 380px;
-    margin: -190px 0 0 -190px;
-    animation: orbit4 10s linear infinite;
-    transform: rotateX(30deg) rotateY(45deg);
-  }
-  
-  &.orbit-5 {
-    width: 420px;
-    height: 420px;
-    margin: -210px 0 0 -210px;
-    animation: orbit5 14s linear infinite;
-    transform: rotateX(90deg) rotateY(30deg);
-  }
-  
-  &.orbit-6 {
-    width: 480px;
-    height: 480px;
-    margin: -240px 0 0 -240px;
-    animation: orbit6 18s linear infinite;
-    transform: rotateX(45deg) rotateY(60deg);
-  }
-}
-
-.orbital-decoration {
-  position: absolute;
-  top: 0;
-  left: 50%;
-  width: 20px;
-  height: 20px;
-  margin-left: -10px;
-  margin-top: -10px;
-  font-size: 18px;
-  font-weight: bold;
-  color: #2c3e50;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-}
-
-/* Orbital animations */
-@keyframes orbit1 {
-  0% { transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg); }
-  100% { transform: rotateX(0deg) rotateY(0deg) rotateZ(360deg); }
-}
-
-@keyframes orbit2 {
-  0% { transform: rotateX(60deg) rotateY(0deg) rotateZ(0deg); }
-  100% { transform: rotateX(60deg) rotateY(0deg) rotateZ(360deg); }
-}
-
-@keyframes orbit3 {
-  0% { transform: rotateX(120deg) rotateY(0deg) rotateZ(0deg); }
-  100% { transform: rotateX(120deg) rotateY(0deg) rotateZ(360deg); }
-}
-
-@keyframes orbit4 {
-  0% { transform: rotateX(30deg) rotateY(45deg) rotateZ(0deg); }
-  100% { transform: rotateX(30deg) rotateY(45deg) rotateZ(360deg); }
-}
-
-@keyframes orbit5 {
-  0% { transform: rotateX(90deg) rotateY(30deg) rotateZ(0deg); }
-  100% { transform: rotateX(90deg) rotateY(30deg) rotateZ(360deg); }
-}
-
-@keyframes orbit6 {
-  0% { transform: rotateX(45deg) rotateY(60deg) rotateZ(0deg); }
-  100% { transform: rotateX(45deg) rotateY(60deg) rotateZ(360deg); }
-}
-
-/* Добавляем стили для Three.js сферы */
-.threejs-sphere-wrapper {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  z-index: 2;
   width: 100%;
-  height: 100%;
-  z-index: 3;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 20px;
 }
 
-/* Убираем старые стили .sphere, .sphere-half, .sphere-highlight */
-/* Оставляем только орбитальные стили */
+// Общие стили для компонентов
+.glass-panel {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 20px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 
-/* Responsive */
-@media (max-width: 768px) {
-  .nav-bar {
-    gap: 40px;
-    padding: 30px 0 40px;
-    flex-direction: column;
-    gap: 20px;
-    
-    .nav-links {
-      gap: 30px;
-    }
-    
-    .nav-link {
-      font-size: 16px;
-    }
-    
-    .social-links {
-      gap: 15px;
-      
-      .social-link {
-        font-size: 20px;
-      }
-    }
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
   }
-  
-  .sphere-container {
-    width: 240px;
-    height: 240px;
-    top: 30vh; // Для мобильных тоже поднимаем
+}
+
+// Анимации
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Адаптивность
+@media (max-width: 768px) {
+  .content-wrapper {
+    padding: 15px;
+  }
+
+  .glass-panel {
+    padding: 15px;
+    margin-bottom: 15px;
   }
 }
 
 @media (max-width: 480px) {
-  .nav-bar {
-    padding: 20px 0 30px;
-    
-    .nav-links {
-      gap: 20px;
-    }
-    
-    .nav-link {
-      font-size: 14px;
-    }
-    
-    .social-links {
-      gap: 12px;
-      
-      .social-link {
-        font-size: 18px;
-      }
-    }
+  .content-wrapper {
+    padding: 10px;
   }
-  
-  .sphere-container {
-    width: 200px;
-    height: 200px;
-    top: 35vh;
+
+  .glass-panel {
+    padding: 10px;
+    margin-bottom: 10px;
   }
 }

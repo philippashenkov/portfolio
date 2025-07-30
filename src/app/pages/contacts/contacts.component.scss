@@ -1,46 +1,217 @@
-.page-container {
-  padding: 2rem;
-  color: white;
-  max-width: 800px;
-  margin: 0 auto;
-  animation: fadeIn 1s ease-in-out;
+@use '../../shared/styles/page-base';
+
+.contact-content {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 }
 
-@keyframes fadeIn {
-  from {
-    opacity: 0;
+.contact-info {
+  @extend .card;
+  
+  .contact-methods {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-top: 1rem;
   }
-  to {
-    opacity: 1;
+  
+  .contact-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    transition: all 0.3s ease;
+    
+    &:hover {
+      background: rgba(255, 255, 255, 0.1);
+      transform: translateX(10px);
+    }
+    
+    .contact-icon {
+      font-size: 2rem;
+      color: #00ffff;
+      min-width: 3rem;
+      text-align: center;
+    }
+    
+    .contact-details {
+      flex: 1;
+      
+      .contact-label {
+        color: #ffc107;
+        font-size: 0.9rem;
+        margin-bottom: 0.3rem;
+      }
+      
+      .contact-value {
+        color: white;
+        font-size: 1.1rem;
+        
+        a {
+          color: inherit;
+          
+          &:hover {
+            color: #00ffff;
+          }
+        }
+      }
+    }
   }
 }
 
-h2 {
-  font-size: 2.5rem;
-  margin-bottom: 1rem;
-  color: #00ffff;
+.contact-form {
+  @extend .card;
+  
+  .form-group {
+    margin-bottom: 1.5rem;
+    
+    label {
+      display: block;
+      color: #00ffff;
+      margin-bottom: 0.5rem;
+      font-weight: bold;
+    }
+    
+    input, textarea {
+      width: 100%;
+      padding: 0.75rem;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 8px;
+      color: white;
+      font-family: 'Courier New', monospace;
+      transition: all 0.3s ease;
+      
+      &:focus {
+        outline: none;
+        border-color: #00ffff;
+        box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+        background: rgba(255, 255, 255, 0.15);
+      }
+      
+      &::placeholder {
+        color: rgba(255, 255, 255, 0.5);
+      }
+    }
+    
+    textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+  }
+  
+  .submit-btn {
+    @extend .btn;
+    width: 100%;
+    font-size: 1.1rem;
+    padding: 1rem;
+  }
 }
 
-p, li {
-  font-size: 1.2rem;
-  line-height: 1.6;
+.social-links-section {
+  @extend .card;
+  grid-column: 1 / -1;
+  text-align: center;
+  
+  .social-links {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 1rem;
+    flex-wrap: wrap;
+  }
+  
+  .social-link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.8);
+    transition: all 0.3s ease;
+    padding: 1rem;
+    border-radius: 10px;
+    
+    &:hover {
+      transform: translateY(-5px);
+      color: white;
+    }
+    
+    .social-icon {
+      font-size: 3rem;
+      transition: all 0.3s ease;
+    }
+    
+    .social-name {
+      font-size: 0.9rem;
+      font-weight: bold;
+    }
+    
+    &.github:hover {
+      background: rgba(102, 198, 68, 0.2);
+      .social-icon {
+        color: #6cc644;
+        text-shadow: 0 0 15px #6cc644;
+      }
+    }
+    
+    &.linkedin:hover {
+      background: rgba(0, 119, 181, 0.2);
+      .social-icon {
+        color: #0077b5;
+        text-shadow: 0 0 15px #0077b5;
+      }
+    }
+    
+    &.email:hover {
+      background: rgba(255, 107, 107, 0.2);
+      .social-icon {
+        color: #ff6b6b;
+        text-shadow: 0 0 15px #ff6b6b;
+      }
+    }
+    
+    &.telegram:hover {
+      background: rgba(0, 136, 204, 0.2);
+      .social-icon {
+        color: #0088cc;
+        text-shadow: 0 0 15px #0088cc;
+      }
+    }
+  }
 }
 
-a {
-  color: #ff6b6b;
-  text-decoration: none;
-  transition: color 0.3s ease;
+// Responsive
+@media (max-width: 768px) {
+  .contact-content {
+    grid-template-columns: 1fr;
+  }
+  
+  .social-links {
+    gap: 1rem;
+  }
+  
+  .social-link {
+    .social-icon {
+      font-size: 2.5rem;
+    }
+  }
 }
 
-a:hover {
-  color: #ffc107;
-}
-
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-li {
-  margin-bottom: 0.5rem;
+@media (max-width: 480px) {
+  .contact-item {
+    flex-direction: column;
+    text-align: center;
+    
+    .contact-icon {
+      margin-bottom: 0.5rem;
+    }
+  }
+  
+  .social-links {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }

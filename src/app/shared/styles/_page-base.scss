@@ -1,0 +1,24 @@
+@use './mixins' as *;
+
+.card {
+  @include card;
+}
+
+.glass-panel {
+  @include glass-effect;
+  border-radius: 12px;
+  padding: 1.5rem;
+}
+
+.text-gradient {
+  @include text-gradient;
+}
+
+// Animations
+.fade-in {
+  @include fade-in;
+}
+
+.slide-up {
+  @include slide-up;
+}

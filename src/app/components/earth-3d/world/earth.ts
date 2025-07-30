@@ -99,27 +99,30 @@ export default class Earth {
     // Дополнительные параллели (каждые 15 градусов)
     const minorLatitudes = [-75, -45, -15, 15, 45, 75];
     
-    // Создаем основные линии широт (ярче)
+    // Единый цвет для всех линий широт
+    const uniformColor = 0x00ffff; // Голубой цвет
+    
+    // Создаем основные линии широт
     majorLatitudes.forEach(lat => {
       const curve = this.createLatitudeCurve(lat, radius);
       const material = new THREE.LineBasicMaterial({
-        color: lat === 0 ? 0x00ffff : 0x0099cc, // Экватор ярче
+        color: uniformColor,
         transparent: true,
-        opacity: lat === 0 ? 1.0 : 0.8,
-        linewidth: lat === 0 ? 3 : 2
+        opacity: 0.8,
+        linewidth: 2
       });
       
       const line = new THREE.Line(curve, material);
       this.gridGroup!.add(line);
     });
     
-    // Создаем дополнительные линии широт (тусклее)
+    // Создаем дополнительные линии широт
     minorLatitudes.forEach(lat => {
       const curve = this.createLatitudeCurve(lat, radius);
       const material = new THREE.LineBasicMaterial({
-        color: 0x006699,
+        color: uniformColor,
         transparent: true,
-        opacity: 0.4,
+        opacity: 0.5,
         linewidth: 1
       });
       
@@ -137,27 +140,30 @@ export default class Earth {
     // Дополнительные меридианы (каждые 15 градусов)
     const minorLongitudes = [15, 45, 75, 105, 135, 165, -165, -135, -105, -75, -45, -15];
     
-    // Создаем основные линии долгот (ярче)
+    // Единый цвет для всех линий долгот
+    const uniformColor = 0x00ffff; // Голубой цвет
+    
+    // Создаем основные линии долгот
     majorLongitudes.forEach(lng => {
       const curve = this.createLongitudeCurve(lng, radius);
       const material = new THREE.LineBasicMaterial({
-        color: lng === 0 ? 0x00ffff : 0x0099cc, // Гринвичский меридиан ярче
+        color: uniformColor,
         transparent: true,
-        opacity: lng === 0 || lng === 180 ? 1.0 : 0.8,
-        linewidth: lng === 0 || lng === 180 ? 3 : 2
+        opacity: 0.8,
+        linewidth: 2
       });
       
       const line = new THREE.Line(curve, material);
       this.gridGroup!.add(line);
     });
     
-    // Создаем дополнительные линии долгот (тусклее)
+    // Создаем дополнительные линии долгот
     minorLongitudes.forEach(lng => {
       const curve = this.createLongitudeCurve(lng, radius);
       const material = new THREE.LineBasicMaterial({
-        color: 0x006699,
+        color: uniformColor,
         transparent: true,
-        opacity: 0.4,
+        opacity: 0.5,
         linewidth: 1
       });
       
