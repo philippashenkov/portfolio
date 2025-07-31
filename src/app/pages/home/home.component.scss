@@ -84,17 +84,15 @@
   margin: 6vh 0 2vh 3rem;
   animation: fadeInDown 0.8s ease-out;
   z-index: 10;
-  max-width: 50%;
 
   h2 {
     font-size: 3.5rem;
     font-weight: 700;
     margin-bottom: 0.75rem;
-    background: linear-gradient(to right, #ffd700, #0057b7);
+    background: #dbe5ef;
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
     line-height: 1.1;
   }
 
@@ -110,7 +108,7 @@
 .info-block {
   position: relative;
   margin-left: 3rem;
-  width: 350px;
+  width: 500px;
   background: rgba(0, 0, 0, 0.6);
   backdrop-filter: blur(20px);
   border-radius: 12px;
@@ -174,12 +172,13 @@
 .earth-container {
   position: absolute;
   right: 5%;
-  top: 20%;
+      top: 35%;
   width: 450px;
   height: 450px;
   perspective: 900px;
   transform-style: preserve-3d;
   z-index: 5;
+  
 
   .orbit-system {
     position: absolute;
@@ -203,18 +202,36 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(14, 227, 227, 0.847);
   border-radius: 50%;
   transform-style: preserve-3d;
   animation: rotateOrbit 20s linear infinite;
 
   .orbital-decoration {
     position: absolute;
-    color: #ffd700;
+    left: -10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #00ffff;
     font-size: 1.5rem;
     animation: glowPulse 2s ease-in-out infinite;
-    text-shadow: 0 0 10px rgba(255, 215, 0, 0.8);
-  }
+    text-shadow: 0 0 10px rgba(0, 140, 255, 0.8);
+    z-index: 10;
+    &::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 80%;
+        height: 80%;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(0, 255, 183, 0.5) 0%, transparent 70%);
+        transform: translate(-50%, -50%) scale(1.1);
+        filter: blur(8px);
+        opacity: 0.8;
+        z-index: -1;
+    }
+}
 }
 
 @for $i from 1 through 8 {
@@ -369,7 +386,6 @@
 // Responsive styles
 @media (max-width: 1400px) {
   .earth-container {
-    right: 2%;
     transform: translateY(-50%) scale(0.8);
   }
 

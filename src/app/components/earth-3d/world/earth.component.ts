@@ -1,5 +1,18 @@
 import { Component, AfterViewInit, NgZone, ViewChild, ElementRef, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
-import { Scene, PerspectiveCamera, WebGLRenderer, Color, Mesh, Object3D, Material } from '../../../shared/three-utils';
+import { 
+  Scene, 
+  PerspectiveCamera, 
+  WebGLRenderer, 
+  Color, 
+  Mesh, 
+  Object3D, 
+  Material,
+  Fog,
+  ShadowMapType,
+  PCFSoftShadowMap,
+  TextureLoader,
+  Texture
+} from 'three';
 import Earth from './earth';
 
 // Add ResizeObserver type for TypeScript if not present
@@ -85,29 +98,31 @@ export class EarthComponent implements AfterViewInit, OnDestroy {
     this.scene = new Scene();
     this.scene.background = new Color(0x000000);
     
-    // Setup camera с минимальными настройками
+    // Улучшенная настройка камеры для более кинематографичного вида
     this.camera = new PerspectiveCamera(
-      45, // Увеличиваем поле зрения для лучшего обзора
+      35, // Уменьшаем FOV для более кинематографичного вида
       this.canvasRef.nativeElement.clientWidth / this.canvasRef.nativeElement.clientHeight,
-      1, // Ближняя плоскость
-      1000 // Дальняя плоскость
+      0.1, // Уменьшаем ближнюю плоскость для лучшей детализации
+      2000 // Увеличиваем дальнюю плоскость для лучшей глубины
     );
-    this.camera.position.set(10, 5, 15); // Измененная позиция под углом для лучшего обзора вращения
-    this.camera.lookAt(0, 0, 0); // Убеждаемся, что камера смотрит на центр
+    this.camera.position.set(20, 12, 25); // Размещаем камеру дальше и под более интересным углом
+    this.camera.lookAt(0, 0, 0);
+    this.scene.fog = new Fog(0x000000, 50, 200); // Добавляем туман для атмосферности
     
-    // Создаем максимально оптимизированный рендерер
+    // Создаем высококачественный рендерер
     this.renderer = new WebGLRenderer({
       canvas: this.canvasRef.nativeElement,
-      antialias: true, // Включаем для лучшего качества
-      powerPreference: 'default', // Используем нормальную мощность
-      alpha: false, // Отключаем прозрачность для ускорения
-      precision: 'mediump',
+      antialias: true,
+      alpha: true,
+      precision: 'highp',
       depth: true,
-      stencil: false,
-      logarithmicDepthBuffer: false,
-      premultipliedAlpha: false,
-      preserveDrawingBuffer: false
+      stencil: true,
+      logarithmicDepthBuffer: true
     });
+    
+    // Включаем тени и настраиваем качество
+    this.renderer.shadowMap.enabled = true;
+    this.renderer.shadowMap.type = PCFSoftShadowMap;
     
     // Устанавливаем нормальное разрешение
     this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
@@ -129,18 +144,53 @@ export class EarthComponent implements AfterViewInit, OnDestroy {
   private initEarth(): void {
     this.ngZone.runOutsideAngular(async () => {
       try {
+        const textureLoader = new TextureLoader();
+        const loadTexture = (path: string): Promise<Texture> => {
+            return new Promise((resolve) => {
+                textureLoader.load(path, (texture) => {
+                    resolve(texture);
+                });
+            });
+        };
+        
+        const [earthTexture, bumpTexture, specularTexture, cloudTexture] = await Promise.all([
+            loadTexture('/assets/textures/earth.jpg'),
+            loadTexture('/assets/textures/bump.jpg'),
+            loadTexture('/assets/textures/specular.jpg'),
+            loadTexture('/assets/textures/cloud.png')
+        ]) as [Texture, Texture, Texture, Texture];
+
         this.earth = new Earth({
           dom: this.canvasRef.nativeElement,
           earth: {
-            radius: 10,
-            rotateSpeed: 0.002,
+            radius: 8,
+            rotateSpeed: 0.001,
             isRotation: true
+          },
+          data: [], // Пустой массив данных для отображения точек
+          textures: {
+            earth: earthTexture,
+            bump: bumpTexture,
+            specular: specularTexture,
+            cloud: cloudTexture
           },
           satellite: {
             show: true,
-            rotateSpeed: 0.01,
-            size: 0.1,
-            number: 20
+            rotateSpeed: 0.005,
+            size: 0.2,
+            number: 8
+          },
+          punctuation: {
+            circleColor: 0x00ffff,
+            lightColumn: {
+              startColor: 0x00ffff,
+              endColor: 0x0066ff
+            }
+          },
+          flyLine: {
+            color: 0x00ffff,
+            flyLineColor: 0x0066ff,
+            speed: 0.004
           }
         });
         await this.earth.init();

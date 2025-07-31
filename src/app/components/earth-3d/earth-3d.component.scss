@@ -3,6 +3,11 @@
   height: 100%;
   position: relative;
   overflow: hidden;
+      display: flex
+;
+    /* align-content: center; */
+    justify-content: center;
+    align-items: center;
 }
 
 .earth-canvas {
