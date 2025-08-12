@@ -18,6 +18,9 @@
     flex-direction: column;
   }
 }
+.orbital-decoration {
+  font-size: 12px;
+}
 
 .nav-bar {
   display: flex;
@@ -172,7 +175,7 @@
 .earth-container {
   position: absolute;
   right: 5%;
-      top: 35%;
+  top: 35%;
   width: 450px;
   height: 450px;
   perspective: 900px;
@@ -216,6 +219,36 @@
     font-size: 1.5rem;
     animation: glowPulse 2s ease-in-out infinite;
     text-shadow: 0 0 10px rgba(0, 140, 255, 0.8);
+    rotate: 90deg;
+    z-index: 10;
+    &::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 80%;
+        height: 80%;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(0, 255, 183, 0.5) 0%, transparent 70%);
+        transform: translate(-50%, -50%) scale(1.1);
+        filter: blur(8px);
+        opacity: 0.8;
+        z-index: -1;
+    }
+      
+}
+
+}
+.orbital-decoration-tag {
+    position: absolute;
+    rotate: 90deg;
+    left: -10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #00ffff;
+    font-size: 1.0rem;
+    animation: glowPulse 2s ease-in-out infinite;
+    text-shadow: 0 0 10px rgba(0, 140, 255, 0.8);
     z-index: 10;
     &::before {
         content: '';
@@ -232,8 +265,6 @@
         z-index: -1;
     }
 }
-}
-
 @for $i from 1 through 8 {
   .orbit-#{$i} {
     width: #{300 + $i * 50}px;

@@ -1,0 +1,17 @@
+{
+	"folders": [
+		{
+			"path": "../../../../../angular-tutorial-project"
+		},
+		{
+			"path": "../../../../../vue"
+		},
+		{
+			"path": "../../../.."
+		},
+		{
+			"path": "../../../../../af-aiconsultant-client-web"
+		}
+	],
+	"settings": {}
+}
